@@ -6,7 +6,7 @@ module b1_mux_2_1_comb
     output y
 );
 
-    assign y = (sel & d1) | ((~sel) & d0);
+    assign y = (sel & d1) | (~sel & d0);
 
 endmodule
 
