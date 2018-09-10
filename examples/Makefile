@@ -1,0 +1,6 @@
+
+JTAG_REMOTE_HOST = 10.0.110.213
+JTAG_REMOTE_PASS = 123
+
+jtag_remote:
+	jtagconfig --addserver $(JTAG_REMOTE_HOST) $(JTAG_REMOTE_PASS)
