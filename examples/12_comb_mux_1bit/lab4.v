@@ -56,6 +56,15 @@ module b1_mux_2_1_case
 
 endmodule
 
+module b1_mux_2_1_index
+(
+    input  [1:0] d,
+    input        sel,
+    output       y
+);
+    assign y = d[sel];
+
+endmodule
 
 module lab4
 (
@@ -64,9 +73,10 @@ module lab4
     output  [ 9:0]  LEDR
 );
 
-	b1_mux_2_1_comb b1_mux_2_1_comb  (SW[0], SW[1], KEY[0], LEDR[0]);
-	b1_mux_2_1_sel b1_mux_2_1_sel    (SW[0], SW[1], KEY[0], LEDR[1]);
-	b1_mux_2_1_if b1_mux_2_1_if      (SW[0], SW[1], KEY[0], LEDR[2]);
-	b1_mux_2_1_case b1_mux_2_1_case  (SW[0], SW[1], KEY[0], LEDR[3]);
+    b1_mux_2_1_comb  b1_mux_2_1_comb  ( SW[0], SW[1], KEY[0], LEDR[0] );
+    b1_mux_2_1_sel   b1_mux_2_1_sel   ( SW[0], SW[1], KEY[0], LEDR[1] );
+    b1_mux_2_1_if    b1_mux_2_1_if    ( SW[0], SW[1], KEY[0], LEDR[2] );
+    b1_mux_2_1_case  b1_mux_2_1_case  ( SW[0], SW[1], KEY[0], LEDR[3] );
+    b1_mux_2_1_index b1_mux_2_1_index ( SW[1:0],      KEY[0], LEDR[4] );
 
 endmodule
