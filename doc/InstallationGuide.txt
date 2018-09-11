@@ -1,0 +1,9 @@
+
+1. For Windows:
+1.1 Install MSYS2 https://www.msys2.org/
+1.2 Assume you installed MSYS2 at C:\msys64, add C:\msys64\usr\bin to your %PATH% environment variable
+1.3 To install necessary bash bin tools, issue the following command under cmd.exe
+    C:\> pacman -S make
+
+1.3 Install Intel Quartus
+1.4 Assume you installed Intel Quartus at C:\altera\16.1\, add  C:\altera\16.1\quartus\bin64 to your %PATH% environment variable
