@@ -12,7 +12,6 @@ create:
 	mkdir -p $(PROJECT_PATH)
 	cp $(PWD)/$(PROJECT_NAME).qpf_ $(PROJECT_PATH)/$(PROJECT_NAME).qpf
 	cp $(PWD)/$(PROJECT_NAME).qsf  $(PROJECT_PATH)/$(PROJECT_NAME).qsf
-	cp $(PWD)/$(PROJECT_NAME).sdc  $(PROJECT_PATH)/$(PROJECT_NAME).sdc
 
 clean:
 	rm -rf $(PROJECT_PATH)
