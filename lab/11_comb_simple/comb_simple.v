@@ -1,5 +1,5 @@
 
-module lab1
+module comb_simple
 (
     input  [1:0] KEY,  // KEYs
     output [9:0] LED   // LEDs
