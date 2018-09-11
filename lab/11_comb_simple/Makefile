@@ -14,7 +14,7 @@ BOARDS_DEFAULT   := de10_lite
 clean:
 	rm -rf $(SIM_DIR)
 
-simdir: sim_clean
+simdir: clean
 	rm -rf $(SIM_DIR)
 	mkdir  $(SIM_DIR)
 
@@ -22,7 +22,7 @@ sim: modelsim_cmd
 
 mrproper: \
 	clean \
-	synth_clean
+	synth_mrproper
 
 ########################################################
 # simulation - Modelsim
@@ -95,5 +95,5 @@ $(BOARDS_SUPPORTED):
 synth_all: SYNTH_TARGET := all
 synth_all: $(BOARDS_SUPPORTED)
 
-synth_clean: SYNTH_TARGET = clean
-synth_clean: $(BOARDS_SUPPORTED)
+synth_mrproper: SYNTH_TARGET = clean
+synth_mrproper: $(BOARDS_SUPPORTED)
