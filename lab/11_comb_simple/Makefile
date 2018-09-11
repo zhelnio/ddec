@@ -69,7 +69,7 @@ iverilog_gui: iverilog_cmd
 	$(GTK_BIN) dump.vcd
 
 ########################################################
-# synthesis targets
+# synthesis - default board only
 
 synth_create:
 	make -C synthesis/$(BOARDS_DEFAULT) create
@@ -85,6 +85,9 @@ synth_load:
 
 synth_clean:
 	make -C synthesis/$(BOARDS_DEFAULT) clean
+
+########################################################
+# synthesis - all the supported boards
 
 $(BOARDS_SUPPORTED):
 	make -C synthesis/$@ $(SYNTH_TARGET)
