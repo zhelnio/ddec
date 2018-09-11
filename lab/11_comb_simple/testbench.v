@@ -23,6 +23,7 @@ module testbench;
             #10;            // pause
             key = 2'b11;    // set test signals value
             #10;            // pause
+            $finish();
         end
 
     // do at the beginning of the simulation
