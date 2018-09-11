@@ -24,9 +24,12 @@ module lab1
     assign LED [5] = a ^ 1'b1;
 
     // De Morgan law illustration
-    assign LED [6] = ~ ( a &   b ) ;
-    assign LED [7] = ~   a | ~ b   ;
-    assign LED [8] = ~ ( a |   b ) ;
-    assign LED [9] = ~   a & ~ b   ;
-    
+    wire m0 = ~ ( a &   b ) ;
+    wire m1 = ~   a | ~ b   ;
+    wire m2 = ~ ( a |   b ) ;
+    wire m3 = ~   a & ~ b   ;
+
+    // joining signals
+    assign LED [9:6] = { m3, m2, m1, m0 };
+
 endmodule
