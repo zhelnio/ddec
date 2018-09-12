@@ -10,7 +10,7 @@ module testbench;
     // creating the instance of the module we want to test
     //  lab1 - module name
     //  dut  - instance name ('dut' means 'device under test')
-    lab1 dut ( key, led );
+    comb_simple dut ( key, led );
 
     // do at the beginning of the simulation
     initial 
