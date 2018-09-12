@@ -1,20 +1,6 @@
 
-module b2_mux_4_1_case_sv
-#(
-    parameter DATA_WIDTH = 4,
-              ADDR_WIDTH = 4,
-    parameter INPT_WIDTH = 2**ADDR_WIDTH
-)(
-    input  [INPT_WIDTH-1:0][DATA_WIDTH-1:0] d,   // packed array in a port list is a SystemVerilog feature
-    input                  [ADDR_WIDTH-1:0] sel,
-    output                 [DATA_WIDTH-1:0] y
-);
-    assign y = d[sel];
-
-endmodule
-
 // this module have no SystemVerilog features in port list and can be used in pure Verilog code
-module lab4_top_sv
+module lab_top
 (
     input  [1:0] idata0,
     input  [1:0] idata1,
@@ -35,12 +21,12 @@ module lab4_top_sv
                                 // in Verilog you have to use 'wire [7:0] input_data' - the result is the same
     assign input_data = { idata2, idata2, idata1, idata0 };
 
-    b2_mux_4_1_case_sv
+    bN_mux_N_1
     #(
         .DATA_WIDTH ( 2 ),
         .ADDR_WIDTH ( 2 )
     )
-    b2_mux_4_1_case_sv
+    bN_mux_N_1
     (
         .d   ( input_data ),
         .sel ( sel        ),

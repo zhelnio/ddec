@@ -7,10 +7,10 @@ module testbench;
     reg  [1:0] b;
     reg  [1:0] c;
     reg  [1:0] sel;
-    wire [5:0][1:0] data;
+    wire [3:0][1:0] data;
  
     // device under test
-    lab4_top dut
+    lab_top dut
     (
         .idata0 ( a       ),
         .idata1 ( b       ),
@@ -19,9 +19,7 @@ module testbench;
         .odata0 ( data[0] ),
         .odata1 ( data[1] ),
         .odata2 ( data[2] ),
-        .odata3 ( data[3] ),
-        .odata4 ( data[4] ),
-        .odata5 ( data[5] )
+        .odata3 ( data[3] )
     );
     
     initial 
@@ -42,12 +40,13 @@ module testbench;
             #10;
             sel = 2'b11;     // sel change to 11; ? -> y
             #10;
+            $finish();
         end
     // do at the beginning of the simulation
     //  print signal values on every change
     initial 
-        $monitor("a=%b b=%b c=%b sel=%b data[0]=%b data[1]=%b data[2]=%b data[3]=%b data[4]=%b data[5]=%b", 
-                  a,   b,   c,   sel,   data[0],   data[1],   data[2],   data[3],   data[4],   data[5]);
+        $monitor("a=%b b=%b c=%b sel=%b data[0]=%b data[1]=%b data[2]=%b data[3]=%b", 
+                  a,   b,   c,   sel,   data[0],   data[1],   data[2],   data[3],  );
     // do at the beginning of the simulation
     initial 
         $dumpvars;  //iverilog dump init
