@@ -3,13 +3,14 @@
 vlib work
 
 # compile all the Verilog sources
-vlog  ../testbench.v ../../*.v 
+vlog     ../rtl/*.v 
+vlog -sv ../tb/*.sv 
 
 # open the testbench module for simulation
 vsim -novopt work.testbench
 
 # add all testbench signals to time diagram
-add wave -radix hex sim:/testbench/*
+add wave sim:/testbench/*
 
 # run the simulation
 run -all
