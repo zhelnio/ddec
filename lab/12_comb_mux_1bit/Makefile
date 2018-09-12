@@ -4,6 +4,7 @@ PWD     := $(shell pwd)
 SIM_DIR  = $(PWD)/sim
 SRC_DIR  = $(PWD)
 TCL_DIR  = $(PWD)/../../common/tcl
+BRD_DIR  = $(PWD)/../../common/board
 
 BOARDS_SUPPORTED := de10_lite de0_cv
 BOARDS_DEFAULT   := de10_lite
@@ -11,25 +12,21 @@ BOARDS_DEFAULT   := de10_lite
 ########################################################
 # common make targets
 
-clean:
-	rm -rf $(SIM_DIR)
-
-simdir: clean
-	rm -rf $(SIM_DIR)
-	mkdir  $(SIM_DIR)
+clean: \
+	modelsim_clean \
+	iverilog_clean \
+	board_clean
 
 sim: modelsim_cmd
-
-mrproper: \
-	clean \
-	synth_mrproper
 
 ########################################################
 # simulation - Modelsim
 
-VLIB_BIN = cd $(SIM_DIR) && vlib
-VLOG_BIN = cd $(SIM_DIR) && vlog
-VSIM_BIN = cd $(SIM_DIR) && vsim
+VSIM_DIR = $(PWD)/sim_modelsim
+
+VLIB_BIN = cd $(VSIM_DIR) && vlib
+VLOG_BIN = cd $(VSIM_DIR) && vlog
+VSIM_BIN = cd $(VSIM_DIR) && vsim
 
 VSIM_OPT_COMMON  = -novopt 
 VSIM_OPT_COMMON +=  work.testbench
@@ -40,7 +37,11 @@ VSIM_OPT_CMD    += -onfinish exit
 
 VSIM_OPT_GUI     = -onfinish stop
 
-modelsim_compile: simdir
+modelsim_clean:
+	rm -rfd $(VSIM_DIR)
+
+modelsim_compile: modelsim_clean
+	mkdir $(VSIM_DIR)
 	$(VLIB_BIN) work
 	$(VLOG_BIN) $(SRC_DIR)/*.v
 
@@ -54,14 +55,20 @@ modelsim_gui: modelsim_compile
 ########################################################
 # simulation - Icarus Verilog
 
-IVER_BIN = cd $(SIM_DIR) && iverilog
-VVP_BIN  = cd $(SIM_DIR) && vvp
-GTK_BIN  = cd $(SIM_DIR) && gtkwave
+ISIM_DIR = $(PWD)/sim_icarus
+
+IVER_BIN = cd $(ISIM_DIR) && iverilog
+VVP_BIN  = cd $(ISIM_DIR) && vvp
+GTK_BIN  = cd $(ISIM_DIR) && gtkwave
 
 IVER_OPT  = -s testbench
 IVER_OPT += $(SRC_DIR)/*.v
 
-iverilog_cmd: simdir
+iverilog_clean:
+	rm -rfd $(ISIM_DIR)
+
+iverilog_cmd:
+	mkdir $(ISIM_DIR)
 	$(IVER_BIN) $(IVER_OPT)
 	$(VVP_BIN) -la.lst -n a.out -vcd
 
@@ -71,29 +78,43 @@ iverilog_gui: iverilog_cmd
 ########################################################
 # synthesis - default board only
 
-synth_create:
-	make -C synthesis/$(BOARDS_DEFAULT) create
+SYNTH_DIR      = $(PWD)/synth_$(BOARDS_DEFAULT)
+SYNTH_TEMPLATE = $(BRD_DIR)/$(BOARDS_DEFAULT)
 
-synth_build:
-	make -C synthesis/$(BOARDS_DEFAULT) build
-
-synth_open:
-	make -C synthesis/$(BOARDS_DEFAULT) open
-
-synth_load:
-	make -C synthesis/$(BOARDS_DEFAULT) load
+synth_all: \
+	synth_clean \
+	synth_create \
+	synth_build
 
 synth_clean:
-	make -C synthesis/$(BOARDS_DEFAULT) clean
+	rm -rfd $(SYNTH_DIR)
+
+synth_create: synth_clean
+	cp -r  $(SYNTH_TEMPLATE) $(SYNTH_DIR)
+
+synth_build:
+	make -C $(SYNTH_DIR) build
+
+synth_open:
+	make -C $(SYNTH_DIR) open
+
+synth_load:
+	make -C $(SYNTH_DIR) load
 
 ########################################################
 # synthesis - all the supported boards
 
+BOARD_NAME         = $@
+BOARD_TEMPLATE_DIR = $(BRD_DIR)/$(BOARD_NAME)
+BOARD_BUILD_DIR    = $(PWD)/synth_$(BOARD_NAME)
+
 $(BOARDS_SUPPORTED):
-	make -C synthesis/$@ $(SYNTH_TARGET)
+	rm -rfd $(BOARD_BUILD_DIR)
+	cp -r  $(BOARD_TEMPLATE_DIR) $(BOARD_BUILD_DIR)
+	make -C $(BOARD_BUILD_DIR) $(SYNTH_TARGET)
 
-synth_all: SYNTH_TARGET := all
-synth_all: $(BOARDS_SUPPORTED)
+board_all: SYNTH_TARGET := all
+board_all: $(BOARDS_SUPPORTED)
 
-synth_mrproper: SYNTH_TARGET = clean
-synth_mrproper: $(BOARDS_SUPPORTED)
+board_clean:
+	rm -rfd $(PWD)/synth_*
