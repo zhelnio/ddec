@@ -7,7 +7,7 @@ module board_wrapper
     input  [ 1:0] KEY,
     input  [ 9:0] SW,
 
-    output [ 9:0] LEDR,
+    output [ 9:0] LED,
 
     output [ 7:0] HEX0,
     output [ 7:0] HEX1,
@@ -53,9 +53,9 @@ module board_wrapper
     display_driver i_digit_1 (relative_distance [ 7: 4], HEX1);
     display_driver i_digit_0 (relative_distance [ 3: 0], HEX0);
 
-    assign LEDR [0] = hc_sr04_echo;
-    assign LEDR [1] = hc_sr04_trig;
+    assign LED [0] = hc_sr04_echo;
+    assign LED [1] = hc_sr04_trig;
 
-    assign LEDR [9:2] = ~ 0 << relative_distance [3:1];
+    assign LED [9:2] = ~ 0 << relative_distance [3:1];
 
 endmodule

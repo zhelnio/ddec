@@ -9,4 +9,4 @@ derive_clock_uncertainty
 set_false_path -from [get_ports {KEY[*]}]  -to *
 set_false_path -from [get_ports {SW[*]}]   -to *
 
-set_false_path -from * -to [get_ports {LEDR[*]}]
+set_false_path -from * -to [get_ports {LED[*]}]

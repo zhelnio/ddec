@@ -15,7 +15,7 @@ set_global_assignment -name SDC_FILE     de10_lite.sdc
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to *CLK*
 set_instance_assignment -name IO_STANDARD "3.3 V Schmitt Trigger" -to KEY*
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to SW*
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to LEDR*
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to LED*
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to HEX*
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to GPIO*
 
@@ -34,16 +34,16 @@ set_location_assignment PIN_A13  -to SW[6]
 set_location_assignment PIN_A14  -to SW[7]
 set_location_assignment PIN_B14  -to SW[8]
 set_location_assignment PIN_F15  -to SW[9]
-set_location_assignment PIN_A8   -to LEDR[0]
-set_location_assignment PIN_A9   -to LEDR[1]
-set_location_assignment PIN_A10  -to LEDR[2]
-set_location_assignment PIN_B10  -to LEDR[3]
-set_location_assignment PIN_D13  -to LEDR[4]
-set_location_assignment PIN_C13  -to LEDR[5]
-set_location_assignment PIN_E14  -to LEDR[6]
-set_location_assignment PIN_D14  -to LEDR[7]
-set_location_assignment PIN_A11  -to LEDR[8]
-set_location_assignment PIN_B11  -to LEDR[9]
+set_location_assignment PIN_A8   -to LED[0]
+set_location_assignment PIN_A9   -to LED[1]
+set_location_assignment PIN_A10  -to LED[2]
+set_location_assignment PIN_B10  -to LED[3]
+set_location_assignment PIN_D13  -to LED[4]
+set_location_assignment PIN_C13  -to LED[5]
+set_location_assignment PIN_E14  -to LED[6]
+set_location_assignment PIN_D14  -to LED[7]
+set_location_assignment PIN_A11  -to LED[8]
+set_location_assignment PIN_B11  -to LED[9]
 set_location_assignment PIN_C14  -to HEX0[0]
 set_location_assignment PIN_E15  -to HEX0[1]
 set_location_assignment PIN_C15  -to HEX0[2]

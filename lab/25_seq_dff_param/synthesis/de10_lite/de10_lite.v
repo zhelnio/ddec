@@ -6,9 +6,9 @@ module de10_lite
 
     input  [ 1:0] KEY,
     input  [ 9:0] SW,
-    output [ 9:0] LEDR
+    output [ 9:0] LED
 );
-    assign LEDR[0] = 1'b0;
+    assign LED[0] = 1'b0;
 
     dff_async_rst_n_param 
     #(
@@ -20,7 +20,7 @@ module de10_lite
         .clk   ( ~KEY  [0]   ),
         .rst_n (  SW   [0]   ),
         .d     (  SW   [9:1] ),
-        .q     (  LEDR [9:1] )
+        .q     (  LED  [9:1] )
     );
 
 endmodule

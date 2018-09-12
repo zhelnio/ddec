@@ -7,4 +7,4 @@ create_clock -period "1 KHz"     [get_ports KEY[0]]
 set_false_path -from [get_ports {KEY[*]}]  -to *
 set_false_path -from [get_ports {SW[*]}]   -to *
 
-set_false_path -from * -to [get_ports {LEDR[*]}]
+set_false_path -from * -to [get_ports {LED[*]}]

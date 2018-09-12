@@ -3,7 +3,7 @@ module board_top
 (
     input   [ 1:0]  KEY,
     input   [ 9:0]  SW,
-    output  [ 9:0]  LEDR
+    output  [ 9:0]  LED
 );
 
     lab_top lab_top
@@ -13,9 +13,9 @@ module board_top
         .idata2 ( SW  [5:4] ),
         .idata3 ( SW  [7:6] ),
         .sel    ( KEY [1:0] ),
-        .odata0 ( LEDR[1:0] ),
-        .odata1 ( LEDR[3:2] ),
-        .odata2 ( LEDR[5:4] ) 
+        .odata0 ( LED [1:0] ),
+        .odata1 ( LED [3:2] ),
+        .odata2 ( LED [5:4] ) 
     );
 
 endmodule

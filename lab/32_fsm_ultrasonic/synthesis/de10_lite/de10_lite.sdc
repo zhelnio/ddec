@@ -4,7 +4,7 @@ create_clock -period "50.0 MHz" [get_ports MAX10_CLK2_50]
 
 derive_clock_uncertainty
 
-set_false_path -from * -to [get_ports {LEDR[*]}]
+set_false_path -from * -to [get_ports {LED[*]}]
 set_false_path -from * -to [get_ports {HEX0[*]}]
 set_false_path -from * -to [get_ports {HEX1[*]}]
 set_false_path -from * -to [get_ports {HEX2[*]}]

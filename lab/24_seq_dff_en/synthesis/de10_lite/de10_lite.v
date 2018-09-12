@@ -6,17 +6,17 @@ module de10_lite
 
     input  [ 1:0] KEY,
     input  [ 9:0] SW,
-    output [ 9:0] LEDR
+    output [ 9:0] LED
 );
 
-    assign LEDR[9:1] = 8'b0;
+    assign LED[9:1] = 8'b0;
 
     dff_with_en dff_with_en
     (
         .clk   ( ~KEY [0] ),
         .en    (  SW  [0] ),
         .d     ( ~KEY [1] ),
-        .q     (  LEDR[0] )
+        .q     (  LED [0] )
     );
 
 endmodule
