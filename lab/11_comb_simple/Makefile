@@ -1,9 +1,10 @@
 
 
 PWD     := $(shell pwd)
-SIM_DIR  = $(PWD)/sim
-SRC_DIR  = $(PWD)
 BRD_DIR  = $(PWD)/../../common/board
+RUN_DIR  = $(PWD)/run
+RTL_DIR  = $(PWD)/rtl
+TB_DIR   = $(PWD)/tb
 
 BOARDS_SUPPORTED := de10_lite de0_cv
 BOARDS_DEFAULT   := de10_lite
@@ -31,7 +32,7 @@ VLIB_BIN = cd $(VSIM_DIR) && vlib
 VLOG_BIN = cd $(VSIM_DIR) && vlog
 VSIM_BIN = cd $(VSIM_DIR) && vsim
 
-VSIM_OPT_COMMON += -do ../script_modelsim.tcl
+VSIM_OPT_COMMON += -do $(RUN_DIR)/script_modelsim.tcl
 
 VSIM_OPT_CMD     = -c
 VSIM_OPT_CMD    += -onfinish exit
@@ -61,13 +62,13 @@ VVP_BIN  = cd $(ISIM_DIR) && vvp
 GTK_BIN  = cd $(ISIM_DIR) && gtkwave
 
 IVER_OPT  = -s testbench
-IVER_OPT += $(SRC_DIR)/*.v
-IVER_OPT += $(SRC_DIR)/*.sv
+IVER_OPT += $(RTL_DIR)/*.v
+IVER_OPT += $(TB_DIR)/*.sv
 
 iverilog_clean:
 	rm -rfd $(ISIM_DIR)
 
-iverilog_cmd:
+iverilog_cmd: iverilog_clean
 	mkdir $(ISIM_DIR)
 	$(IVER_BIN) $(IVER_OPT)
 	$(VVP_BIN) -la.lst -n a.out -vcd

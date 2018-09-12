@@ -3,8 +3,8 @@
 vlib work
 
 # compile all the Verilog sources
-vlog     ../*.v 
-vlog -sv ../*.sv 
+vlog     ../rtl/*.v 
+vlog -sv ../tb/*.sv 
 
 # open the testbench module for simulation
 vsim -novopt work.testbench
