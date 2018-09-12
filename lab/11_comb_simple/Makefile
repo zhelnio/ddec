@@ -18,6 +18,10 @@ clean: \
 
 sim: modelsim_cmd
 
+synth: synth_all
+
+load: synth_load
+
 ########################################################
 # simulation - Modelsim
 
