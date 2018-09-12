@@ -3,7 +3,6 @@
 PWD     := $(shell pwd)
 SIM_DIR  = $(PWD)/sim
 SRC_DIR  = $(PWD)
-TCL_DIR  = $(PWD)/../../common/tcl
 BRD_DIR  = $(PWD)/../../common/board
 
 BOARDS_SUPPORTED := de10_lite de0_cv
@@ -19,6 +18,10 @@ clean: \
 
 sim: modelsim_cmd
 
+synth: synth_all
+
+load: synth_load
+
 ########################################################
 # simulation - Modelsim
 
@@ -28,9 +31,7 @@ VLIB_BIN = cd $(VSIM_DIR) && vlib
 VLOG_BIN = cd $(VSIM_DIR) && vlog
 VSIM_BIN = cd $(VSIM_DIR) && vsim
 
-VSIM_OPT_COMMON  = -novopt 
-VSIM_OPT_COMMON +=  work.testbench
-VSIM_OPT_COMMON += -do $(TCL_DIR)/modelsim.tcl
+VSIM_OPT_COMMON += -do ../script_modelsim.tcl
 
 VSIM_OPT_CMD     = -c
 VSIM_OPT_CMD    += -onfinish exit
@@ -40,15 +41,13 @@ VSIM_OPT_GUI     = -onfinish stop
 modelsim_clean:
 	rm -rfd $(VSIM_DIR)
 
-modelsim_compile: modelsim_clean
+modelsim_dir: modelsim_clean
 	mkdir $(VSIM_DIR)
-	$(VLIB_BIN) work
-	$(VLOG_BIN) $(SRC_DIR)/*.v
 
-modelsim_cmd: modelsim_compile
+modelsim_cmd: modelsim_dir
 	$(VSIM_BIN) $(VSIM_OPT_COMMON) $(VSIM_OPT_CMD)
 
-modelsim_gui: modelsim_compile
+modelsim_gui: modelsim_dir
 	$(VSIM_BIN) $(VSIM_OPT_COMMON) $(VSIM_OPT_GUI)
 
 
@@ -63,6 +62,7 @@ GTK_BIN  = cd $(ISIM_DIR) && gtkwave
 
 IVER_OPT  = -s testbench
 IVER_OPT += $(SRC_DIR)/*.v
+IVER_OPT += $(SRC_DIR)/*.sv
 
 iverilog_clean:
 	rm -rfd $(ISIM_DIR)
