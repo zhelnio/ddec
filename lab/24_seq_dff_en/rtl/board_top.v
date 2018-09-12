@@ -1,9 +1,5 @@
-module de10_lite
+module board_top
 (
-    input         ADC_CLK_10,
-    input         MAX10_CLK1_50,
-    input         MAX10_CLK2_50,
-
     input  [ 1:0] KEY,
     input  [ 9:0] SW,
     output [ 9:0] LED
