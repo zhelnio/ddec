@@ -1,26 +1,6 @@
 
-module b2_mux_N_1_priority_sv
-#(
-    parameter DATA_WIDTH = 4,
-              INPUT_SIZE = 4
-)(
-    input      [INPUT_SIZE-1:0][DATA_WIDTH-1:0] d,   // packed array in a port list is a SystemVerilog feature
-    input      [INPUT_SIZE-1:0]                 sel,
-    output reg                 [DATA_WIDTH-1:0] y
-);
-    always @(*) begin
-        y = d[0];
-        for (int i = 0; i < INPUT_SIZE; i = i+1 ) begin
-            if(sel[i])
-                y = d[i];
-        end
-    end
-
-endmodule
-
-
 // this module have no SystemVerilog features in port list and can be used in pure Verilog code
-module lab4_top_sv
+module lab_top
 (
     input  [1:0] idata0, 
     input  [1:0] idata1,
@@ -40,12 +20,12 @@ module lab4_top_sv
                                 // in Verilog you have to use 'wire [7:0] input_data' - the result is the same
     assign input_data = { idata3, idata2, idata1, idata0 };
 
-    b2_mux_N_1_priority_sv
+    bN_mux_N_1_priority
     #(
         .DATA_WIDTH ( 2 ),
         .INPUT_SIZE ( 4 ) 
     )
-    b2_mux_N_1_priority_sv
+    bN_mux_N_1_priority
     (
         .d   ( input_data ),
         .sel ( sel        ),

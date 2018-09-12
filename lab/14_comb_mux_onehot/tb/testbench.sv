@@ -8,10 +8,10 @@ module testbench;
     reg  [1:0] c;
     reg  [1:0] d;
     reg  [3:0] sel;
-    wire [5:0][1:0] data;
+    wire [2:0][1:0] data;
  
     // device under test
-    lab4_top_sv dut
+    lab_top dut
     (
         .idata0 ( a       ),
         .idata1 ( b       ),
@@ -46,6 +46,7 @@ module testbench;
             #10;
             sel = 4'b1111;     // sel change to 00; a -> y
             #10;
+            $finish();
         end
     // do at the beginning of the simulation
     //  print signal values on every change
