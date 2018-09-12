@@ -1,4 +1,6 @@
 
+`define ENABLE_SV_CODE
+
 // this module have no SystemVerilog features in port list and can be used in pure Verilog code
 module lab_top
 (
@@ -16,6 +18,7 @@ module lab_top
 	b2_mux_3_1_case_correct  b2_mux_3_1_case_correct  (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata1));
 	b2_mux_3_1_casez_correct b2_mux_3_1_casez_correct (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata2));
 
+`ifdef ENABLE_SV_CODE
     // 4. SystemVerilog packed array example
     wire [3:0][1:0] input_data; // packed array is a SystemVerilog feature
                                 // in Verilog you have to use 'wire [7:0] input_data' - the result is the same
@@ -32,5 +35,9 @@ module lab_top
         .sel ( sel        ),
         .y   ( odata3     )
     );
+
+`else
+    assign odata3 = 2'b0;
+`endif
 	
 endmodule
