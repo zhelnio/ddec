@@ -10,19 +10,21 @@ module testbench;
     
     initial $dumpvars;
 
-    initial clk = 0;
-    initial forever begin
-        #20;
-        clk = ~clk;
-    end
+    initial begin
+        clk <= 0;
+        forever
+            #20 clk <= ~clk;
+        end
 
     initial
     begin
         $monitor ("%0d clk %b d %b q %b", $time, clk, d, q);
 
-        #80 d = 0;
-        #80 d = 1;
-        #80;
+        repeat(2) @(posedge clk);
+        #10 d = 0;
+        repeat(2) @(posedge clk);
+        #10 d = 1;
+        repeat(4) @(posedge clk);
 
         $finish;
     end
