@@ -63,6 +63,7 @@ GTK_BIN  = cd $(ISIM_DIR) && gtkwave
 
 IVER_OPT  = -s testbench
 IVER_OPT += -g2005-sv
+IVER_OPT += -I $(RTL_DIR)
 IVER_OPT += $(RTL_DIR)/*.v
 IVER_OPT += $(TB_DIR)/*.sv
 ifneq (,$(wildcard $(RTL_DIR)/*.sv))

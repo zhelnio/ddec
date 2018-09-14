@@ -5,34 +5,24 @@ module testbench;
     reg  clk, d;
     wire q;
 
-    d_flip_flop d_flip_flop (clk, d, q);
+    // dut
+    sync sync (clk, d, q);
     
     initial $dumpvars;
 
+    initial clk = 0;
+    initial forever begin
+        #20;
+        clk = ~clk;
+    end
+
     initial
     begin
-        
-        
         $monitor ("%0d clk %b d %b q %b", $time, clk, d, q);
 
-        # 20;   clk = 0; d = 0; 
-        # 20;   clk = 1; d = 0;
-        # 20;   clk = 0; d = 1;
-        # 20;   clk = 1; d = 1;
-        # 20;   clk = 0; d = 0;
-        # 20;   clk = 1; d = 0;
-        # 20;   clk = 0; d = 1;
-        # 20;   clk = 1; d = 1;
-        # 10;   clk = 1; d = 0; 
-        # 10;   clk = 0; d = 0;
-        # 10;   clk = 0; d = 0;
-        # 10;   clk = 1; d = 0;
-        # 10;   clk = 1; d = 1;
-        # 10;   clk = 0; d = 1;
-        # 10;   clk = 0; d = 1;
-        # 10;   clk = 1; d = 1;
-        # 10;   clk = 1; d = 0;
-        # 20;
+        #80 d = 0;
+        #80 d = 1;
+        #80;
 
         $finish;
     end
