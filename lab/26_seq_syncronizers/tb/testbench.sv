@@ -2,12 +2,15 @@
 
 module testbench;
 
-    reg  clk, d;
-    wire q;
+    reg        clk;
+    reg        d;
+    wire [2:0] q;
 
     // dut
-    sync sync (clk, d, q);
-    
+    sync       sync       (clk, d, q[0]);
+    sync_merge sync_merge (clk, d, q[1]);
+    sync_block sync_block (clk, d, q[2]);
+
     initial $dumpvars;
 
     initial begin

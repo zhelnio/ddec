@@ -1,3 +1,6 @@
+
+`include "config.vh"
+
 module board_top
 (
     input         CLK,
@@ -8,7 +11,7 @@ module board_top
     wire d   = SW[0] ^ GPIO[0];
     wire q;
 
-    sync sync
+    `MOD_SYNC sync
     (
         .clk ( CLK ),
         .d   ( d   ),
