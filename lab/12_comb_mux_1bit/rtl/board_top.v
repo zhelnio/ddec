@@ -8,14 +8,10 @@ module board_top
 
     lab_top lab_top
     (
-        .idata0  ( SW  [0] ),
-        .idata1  ( SW  [1] ),
-        .sel     ( KEY [0] ),
-        .y_comb  ( LED [0] ),
-        .y_sel   ( LED [1] ),
-        .y_if    ( LED [2] ),
-        .y_case  ( LED [3] ),
-        .y_index ( LED [4] ) 
+        .idata0  ( SW  [  0] ),
+        .idata1  ( SW  [  1] ),
+        .sel     ( KEY [  0] ),
+        .y       ( LED [4:0] ) 
     );
 
 endmodule

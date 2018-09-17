@@ -3,14 +3,10 @@
 // testbench is for simulation only, not for synthesis
 module testbench;
     // input and output test signals
-    reg  a;
-    reg  b;
-    reg  sel;
-    wire y_comb;
-    wire y_sel;
-    wire y_if;
-    wire y_case;
-    wire y_index;
+    reg        a;
+    reg        b;
+    reg        sel;
+    wire [4:0] y;
  
    // creating the instance of the module we want to test
     lab_top dut
@@ -18,11 +14,7 @@ module testbench;
         .idata0  ( a       ),
         .idata1  ( b       ),
         .sel     ( sel     ),
-        .y_comb  ( y_comb  ),
-        .y_sel   ( y_sel   ),
-        .y_if    ( y_if    ),
-        .y_case  ( y_case  ),
-        .y_index ( y_index ) 
+        .y       ( y       ) 
     );
 
     initial
@@ -43,8 +35,8 @@ module testbench;
     // do at the beginning of the simulation
     //  print signal values on every change
     initial 
-        $monitor("a=%b b=%b sel=%b y_comb=%b y_sel=%b y_if=%b y_case=%b y_index=%b", 
-                 a, b, sel, y_comb, y_sel, y_if, y_case, y_index);
+        $monitor("a=%b b=%b sel=%b y=%b", 
+                  a,   b,   sel,   y,   );
     // do at the beginning of the simulation
     initial 
         $dumpvars;  //iverilog dump init
