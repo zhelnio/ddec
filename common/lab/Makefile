@@ -1,4 +1,22 @@
 
+help:
+	$(info make help         - show this message)
+	$(info make clean        - delete synth and simulation folders)
+	$(info make sim          - the same as sim_cmd)
+	$(info make icarus       - the same as icarus_cmd)
+	$(info make synth        - clean, create the board project and run the synthesis (for default board))
+	$(info make load         - the same as synth_load)
+	$(info make sim_cmd      - run simulation in Modelsim (console mode))
+	$(info make sim_gui      - run simulation in Modelsim (gui mode))
+	$(info make icarus_cmd   - run simulation in Icarus Verilog (console mode))
+	$(info make icarus_gui   - run simulation in Icarus Verilog (gui mode))
+	$(info make synth_create - create the board project)
+	$(info make synth_build  - build the board project)
+	$(info make synth_gui    - open the board project)
+	$(info make synth_load   - program the default FPGA board)
+	$(info make board_all    - run synthesis for all the supported boards)
+	$(info Open and read the Makefile for details)
+	@true
 
 PWD     := $(shell pwd)
 BRD_DIR  = $(PWD)/../../common/board
@@ -13,15 +31,18 @@ BOARDS_DEFAULT   := de10_lite
 # common make targets
 
 clean: \
-	modelsim_clean \
-	iverilog_clean \
+	sim_clean \
+	icarus_clean \
 	board_clean
 
-sim: modelsim_cmd
+sim: sim_cmd
 
-icarus: iverilog_cmd
+icarus: icarus_cmd
 
-synth: synth_all
+synth: \
+	synth_clean \
+	synth_create \
+	synth_build
 
 load: synth_load
 
@@ -41,16 +62,16 @@ VSIM_OPT_CMD    += -onfinish exit
 
 VSIM_OPT_GUI     = -onfinish stop
 
-modelsim_clean:
+sim_clean:
 	rm -rfd $(VSIM_DIR)
 
-modelsim_dir: modelsim_clean
+sim_dir: sim_clean
 	mkdir $(VSIM_DIR)
 
-modelsim_cmd: modelsim_dir
+sim_cmd: sim_dir
 	$(VSIM_BIN) $(VSIM_OPT_COMMON) $(VSIM_OPT_CMD)
 
-modelsim_gui: modelsim_dir
+sim_gui: sim_dir
 	$(VSIM_BIN) $(VSIM_OPT_COMMON) $(VSIM_OPT_GUI)
 
 
@@ -72,15 +93,15 @@ ifneq (,$(wildcard $(RTL_DIR)/*.sv))
 	IVER_OPT += $(RTL_DIR)/*.sv
 endif
 
-iverilog_clean:
+icarus_clean:
 	rm -rfd $(ISIM_DIR)
 
-iverilog_cmd: iverilog_clean
+icarus_cmd: icarus_clean
 	mkdir $(ISIM_DIR)
 	$(IVER_BIN) $(IVER_OPT)
 	$(VVP_BIN) -la.lst -n a.out -vcd
 
-iverilog_gui: iverilog_cmd
+icarus_gui: icarus_cmd
 	$(GTK_BIN) dump.vcd
 
 ########################################################
@@ -88,11 +109,6 @@ iverilog_gui: iverilog_cmd
 
 SYNTH_DIR      = $(PWD)/synth_$(BOARDS_DEFAULT)
 SYNTH_TEMPLATE = $(BRD_DIR)/$(BOARDS_DEFAULT)
-
-synth_all: \
-	synth_clean \
-	synth_create \
-	synth_build
 
 synth_clean:
 	rm -rfd $(SYNTH_DIR)
