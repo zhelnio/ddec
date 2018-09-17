@@ -50,7 +50,7 @@ initial
 
 
     initial 
-        #2000 $finish;
+        #600 $finish;
     
    // do at the beginning of the simulation
    // print signal values on every change
