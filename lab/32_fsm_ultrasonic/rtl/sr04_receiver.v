@@ -1,5 +1,6 @@
 
-module lab_top
+
+module sr04_receiver
 #(
     parameter   RANGE_WIDTH      = 16,
                 DELAY_CLK_1US    = 50,
@@ -14,12 +15,25 @@ module lab_top
     output                   trigger,
     output [RANGE_WIDTH-1:0] range
 );
+
+    //             +---------------+   +---------------+
+    //             | strobe_gen_cm |   | strobe_gen_us |
+    //             +-------+-------+   +--------+------+
+    //                     |                    |
+    //             +-------v--------------------v------+
+    // echo  +----->           sr04_control            +----> trigger
+    //             +-------+-------------------+-------+
+    //                     |                   |
+    //             +-------v-------+   +-------v-------+
+    //             |   counter     +---> output buffer +----> range
+    //             +---------------+   +---------------+
+
     wire strobe_us;     // micro second strobe
     wire strobe_cm;     // centimetre strobe
     wire measure_cm;    // centimetre was measured
     wire measure_end;   // measurement end
 
-    clk_divider
+    strobe_gen
     #(
         .DELAY  ( DELAY_CLK_1US )
     )
@@ -31,7 +45,7 @@ module lab_top
         .strobe ( strobe_us    )
     );
 
-    clk_divider
+    strobe_gen
     #( 
         .DELAY  ( DELAY_1US_1SM )
     )
@@ -43,13 +57,13 @@ module lab_top
         .strobe ( strobe_cm     )
     );
 
-    hc_src04_fsm
+    sr04_control
     #(
         .DELAY_TRIGGER ( DELAY_TRIGGER_US ),
         .DELAY_ECHO    ( DELAY_ECHO_US    ),
         .DELAY_POSTFIX ( DELAY_POSTFIX_US ) 
     )
-    fsm
+    control
     (
         .clk           ( clk              ),
         .rst_n         ( rst_n            ),

@@ -20,11 +20,11 @@ module board_top
     wire echo    = GPIO[35];
     wire trigger;
 
-    lab_top
+    sr04_receiver
     #(
         .RANGE_WIDTH ( RANGE_WIDTH )
     )
-    lab_top
+    sr04_receiver
     (
         .clk     ( clk     ),
         .rst_n   ( rst_n   ),
@@ -43,6 +43,5 @@ module board_top
     assign LED [ 0] = echo;
     assign LED [ 1] = trigger;
     assign GPIO[33] = trigger;
-    
 
 endmodule

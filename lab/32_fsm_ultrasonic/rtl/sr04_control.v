@@ -1,6 +1,6 @@
 
 
-module hc_src04_fsm
+module sr04_control
 #(
     parameter DELAY_TRIGGER = 10,
               DELAY_ECHO    = 25000,
@@ -30,7 +30,7 @@ module hc_src04_fsm
     // State variables
     wire [            1:0] state;
     reg  [            1:0] state_nx;
-    prm_register #(2) cntr_r (clk, rst_n, state_nx, state);
+    prm_register #(2) state_r (clk, rst_n, state_nx, state);
 
     wire [DELAY_WIDTH-1:0] delay;
     wire [DELAY_WIDTH-1:0] delay_nx = (state_nx != state) ? 0 : delay + 1;

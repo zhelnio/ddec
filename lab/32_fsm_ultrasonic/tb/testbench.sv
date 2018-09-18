@@ -4,9 +4,6 @@ module testbench;
 
     localparam t    = 20;
     localparam Tmax = 300000;
-    localparam Twait = 100;
-    localparam Techo = 40;
-    localparam enableEcho = 0;
     localparam WIDTH = 16;
 
     // clock abn reset
@@ -29,14 +26,16 @@ module testbench;
     wire             trigger;
 
     // dut
-    lab_top
+    sr04_receiver
     #(
-        .RANGE_WIDTH   ( WIDTH ),
-        .DELAY_TRIGGER ( 10    ),
-        .DELAY_WAIT    ( 200   ),
-        .DELAY_POSTFIX ( 500   ) 
+        .RANGE_WIDTH      ( WIDTH ),
+        .DELAY_CLK_1US    ( 3     ),
+        .DELAY_1US_1SM    ( 3     ),
+        .DELAY_TRIGGER_US ( 2     ),
+        .DELAY_ECHO_US    ( 2000  ),
+        .DELAY_POSTFIX_US ( 5000  ) 
     )
-    lab_top
+    dut
     (
         .clk     ( clk       ),
         .rst_n   ( rst_n     ),
@@ -45,20 +44,14 @@ module testbench;
         .range   ( range     ) 
     );
 
-    initial begin
-        echo = 1'b0;
-        forever begin
-            @(posedge clk);
-            if(enableEcho) begin
-                if(trigger) begin
-                    repeat(Twait) @(posedge clk);
-                    echo = 1'b1;
-                    repeat(Techo) @(posedge clk);
-                    echo = 1'b0;
-                end
-            end
-        end
-    end
+    // peripheral device simulation model
+    sr04_simulation_model sensor
+    (
+        .clk     ( clk     ),
+        .trigger ( trigger ),
+        .enable  ( 1'b1    ),
+        .echo    ( echo    ) 
+    );
 
     // test duration
     initial begin
@@ -68,5 +61,32 @@ module testbench;
 
     initial $monitor ("%5t trigger=%b echo=%b range=%d", $time, trigger, echo, range);
     initial $dumpvars;
+
+endmodule
+
+module sr04_simulation_model 
+#(
+    parameter Twait = 1000,
+              Techo = 3000
+)(
+    input      clk,
+    input      trigger,
+    input      enable,
+    output reg echo
+);
+
+    initial begin
+        echo = 1'b0;
+        forever begin
+            @(posedge clk);
+            @(negedge trigger);
+            if(enable) begin
+                repeat(Twait) @(posedge clk);
+                echo = 1'b1;
+                repeat(Techo) @(posedge clk);
+                echo = 1'b0;
+            end
+        end
+    end
 
 endmodule
