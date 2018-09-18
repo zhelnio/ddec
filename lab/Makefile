@@ -22,6 +22,9 @@ sim: $(LAB_LIST)
 icarus: LAB_TARGET = icarus
 icarus: $(LAB_LIST)
 
+board_all: LAB_TARGET = board_all
+board_all: $(LAB_LIST)
+
 ################################################
 # remote programmer settings
 

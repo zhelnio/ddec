@@ -5,6 +5,7 @@ help:
 	$(info make sim          - the same as sim_cmd)
 	$(info make icarus       - the same as icarus_cmd)
 	$(info make synth        - clean, create the board project and run the synthesis (for default board))
+	$(info make open         - the same as synth_gui)
 	$(info make load         - the same as synth_load)
 	$(info make sim_cmd      - run simulation in Modelsim (console mode))
 	$(info make sim_gui      - run simulation in Modelsim (gui mode))
@@ -25,7 +26,7 @@ RTL_DIR  = $(PWD)/rtl
 TB_DIR   = $(PWD)/tb
 
 BOARDS_SUPPORTED := de10_lite de0_cv
-BOARDS_DEFAULT   := de10_lite
+BOARDS_DEFAULT   := de0_cv
 
 ########################################################
 # common make targets
@@ -45,6 +46,8 @@ synth: \
 	synth_build
 
 load: synth_load
+
+open: synth_gui
 
 ########################################################
 # simulation - Modelsim
@@ -119,7 +122,7 @@ synth_create: synth_clean
 synth_build:
 	make -C $(SYNTH_DIR) build
 
-synth_open:
+synth_gui:
 	make -C $(SYNTH_DIR) open
 
 synth_load:
