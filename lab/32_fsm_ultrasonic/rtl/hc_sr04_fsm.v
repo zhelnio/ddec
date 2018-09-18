@@ -10,10 +10,10 @@ module hc_src04_fsm
     input      clk,
     input      rst_n,
     input      strobe_us,
-    input      strobe_sm,
+    input      strobe_cm,
     input      echo,
     output reg trigger,
-    output reg measure_sm,
+    output reg measure_cm,
     output reg measure_end
 );
     localparam S_TRIGGER = 0, // trigger input to module
@@ -54,11 +54,11 @@ module hc_src04_fsm
     // fsm output
     always @(*) begin
         trigger     = 1'b0;
-        measure_sm  = 1'b0;
+        measure_cm  = 1'b0;
         measure_end = 1'b0;
         case (state)
             S_TRIGGER : trigger     = 1'b1;
-            S_ECHO    : measure_sm  = strobe_sm & echo;
+            S_ECHO    : measure_cm  = strobe_cm & echo;
             S_SAVE    : measure_end = 1'b1;
         endcase
     end
