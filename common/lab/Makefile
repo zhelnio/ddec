@@ -25,8 +25,8 @@ RUN_DIR  = $(PWD)/run
 RTL_DIR  = $(PWD)/rtl
 TB_DIR   = $(PWD)/tb
 
-BOARDS_SUPPORTED := de10_lite de0_cv
-BOARDS_DEFAULT   := de0_cv
+BOARDS_SUPPORTED := de10_lite de0_cv nexys4_ddr
+BOARDS_DEFAULT   := de10_lite
 
 ########################################################
 # common make targets
@@ -118,6 +118,7 @@ synth_clean:
 
 synth_create: synth_clean
 	cp -r  $(SYNTH_TEMPLATE) $(SYNTH_DIR)
+	make -C $(SYNTH_DIR) create
 
 synth_build:
 	make -C $(SYNTH_DIR) build

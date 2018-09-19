@@ -6,6 +6,9 @@ CABLE_NAME ?= "USB-Blaster"
 
 all: build
 
+create:
+	@true
+
 open:
 	quartus $(PROJECT_NAME).qpf &
 
