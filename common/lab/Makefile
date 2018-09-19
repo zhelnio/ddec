@@ -79,6 +79,35 @@ sim_gui: sim_dir
 
 
 ########################################################
+# simulation - Xilinx Vivado Simulator
+
+XSIM_DIR = $(PWD)/sim_xsim
+
+XVLOG_BIN = cd $(XSIM_DIR) && xvlog
+XELAB_BIN = cd $(XSIM_DIR) && xelab
+XSIM_BIN  = cd $(XSIM_DIR) && xsim
+
+xsim_clean:
+	rm -rfd $(XSIM_DIR)
+
+xsim_dir: xsim_clean
+	mkdir $(XSIM_DIR)
+
+xsim_compile: xsim_dir
+	$(XVLOG_BIN)    $(RTL_DIR)/*.v
+ifneq (,$(wildcard $(RTL_DIR)/*.sv))
+	$(XVLOG_BIN) --sv $(RTL_DIR)/*.sv
+endif
+	$(XVLOG_BIN) --sv $(TB_DIR)/*.sv
+	$(XELAB_BIN) --incr --debug typical --relax --mt 2 testbench -s tb_sim
+
+xsim_cmd: xsim_compile
+	$(XSIM_BIN) --runall tb_sim
+
+xsim_gui: xsim_compile
+	$(XSIM_BIN) --gui --tl tb_sim
+
+########################################################
 # simulation - Icarus Verilog
 
 ISIM_DIR = $(PWD)/sim_icarus
