@@ -26,7 +26,7 @@ RTL_DIR  = $(PWD)/rtl
 TB_DIR   = $(PWD)/tb
 
 BOARDS_SUPPORTED := de10_lite de0_cv nexys4_ddr
-BOARDS_DEFAULT   := de10_lite
+BOARDS_DEFAULT   := nexys4_ddr
 
 ########################################################
 # common make targets
