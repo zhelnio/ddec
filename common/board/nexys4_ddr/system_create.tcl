@@ -35,4 +35,7 @@ if {[info exists sim_files]} {
     set_property top $testbench_top $obj
 }
 
+# define macros VIVADO_SYNTHESIS
+set_property -name {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} -value {-verilog_define VIVADO_SYNTHESIS} -objects [get_runs synth_1]
+
 puts "INFO: Project created:$project_name"
