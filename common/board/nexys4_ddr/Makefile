@@ -16,4 +16,4 @@ build:
 	vivado $(OPT_VIVADO) -source system_synth.tcl
 
 load:
-	@true
+	vivado $(OPT_VIVADO) -source system_load.tcl
