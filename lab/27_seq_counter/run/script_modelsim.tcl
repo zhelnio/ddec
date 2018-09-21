@@ -3,7 +3,8 @@
 vlib work
 
 # compile all the Verilog sources
-vlog     ../rtl/*.v +incdir+../rtl
+vlog     ../rtl/*.v
+vlog -sv ../rtl/*.sv 
 vlog -sv ../tb/*.sv 
 
 # open the testbench module for simulation
