@@ -7,11 +7,11 @@ set timing_report "timing_1"
 open_project "$project_name.xpr"
 
 # run synthesis
-launch_runs $synth_task -jobs 2
+launch_runs $synth_task
 wait_on_run -verbose $synth_task
 
 # run implementation
-launch_runs $impl_task  -jobs 2 
+launch_runs $impl_task
 wait_on_run -verbose $impl_task
 
 # write bitstream
