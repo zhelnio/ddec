@@ -4,21 +4,17 @@ module board_top
     input  [ 9:0] SW,
     output [ 9:0] LED
 );
-    wire clk;
-
-    `ifdef VIVADO_SYNTHESIS
-        IBUF IBUF (.I(KEY[0]), .O(clk));
-    `else
-        assign clk = KEY[0];
-    `endif
-
-    assign LED[9:1] = 8'b0;
+    wire d   = KEY[0];
+    wire clk = KEY[1];
+    wire q;
 
     d_flip_flop d_flip_flop
     (
-        .clk ( ~clk ),
-        .d   ( ~KEY [1] ),
-        .q   (  LED [0] )
+        .clk ( clk ),
+        .d   ( d   ),
+        .q   ( q   )
     );
+
+    assign LED[9:0] = { 7'b0, q, clk, d };
 
 endmodule
