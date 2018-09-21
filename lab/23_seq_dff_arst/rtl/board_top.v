@@ -4,15 +4,19 @@ module board_top
     input  [ 9:0] SW,
     output [ 9:0] LED
 );
-
-    assign LED[9:1] = 8'b0;
+    wire d     = KEY[0];
+    wire clk   = KEY[1];
+    wire rst_n = SW [0];
+    wire q;
 
     dff_async_rst_n dff_async_rst_n
     (
-        .clk   ( ~KEY [0] ),
-        .rst_n (  SW  [0] ),
-        .d     ( ~KEY [1] ),
-        .q     (  LED [0] )
+        .clk   ( clk   ),
+        .rst_n ( rst_n ),
+        .d     ( d     ),
+        .q     ( q     )
     );
+
+    assign LED[9:0] = { 6'b0, rst_n, q, clk, d };
 
 endmodule
