@@ -26,7 +26,7 @@ RTL_DIR  = $(PWD)/rtl
 TB_DIR   = $(PWD)/tb
 
 BOARDS_SUPPORTED := de10_lite de0_cv nexys4_ddr
-BOARDS_DEFAULT   := nexys4_ddr
+BOARD            ?= nexys4_ddr
 
 ########################################################
 # common make targets
@@ -37,6 +37,8 @@ clean: \
 	board_clean
 
 sim: sim_cmd
+
+xsim: xsim_cmd
 
 icarus: icarus_cmd
 
@@ -139,8 +141,8 @@ icarus_gui: icarus_cmd
 ########################################################
 # synthesis - default board only
 
-SYNTH_DIR      = $(PWD)/synth_$(BOARDS_DEFAULT)
-SYNTH_TEMPLATE = $(BRD_DIR)/$(BOARDS_DEFAULT)
+SYNTH_DIR      = $(PWD)/synth_$(BOARD)
+SYNTH_TEMPLATE = $(BRD_DIR)/$(BOARD)
 
 synth_clean:
 	rm -rfd $(SYNTH_DIR)
@@ -168,9 +170,9 @@ BOARD_BUILD_DIR    = $(PWD)/synth_$(BOARD_NAME)
 $(BOARDS_SUPPORTED):
 	rm -rfd $(BOARD_BUILD_DIR)
 	cp -r  $(BOARD_TEMPLATE_DIR) $(BOARD_BUILD_DIR)
-	make -C $(BOARD_BUILD_DIR) $(SYNTH_TARGET)
+	make -C $(BOARD_BUILD_DIR) create
+	make -C $(BOARD_BUILD_DIR) build
 
-board_all: SYNTH_TARGET := all
 board_all: $(BOARDS_SUPPORTED)
 
 board_clean:
