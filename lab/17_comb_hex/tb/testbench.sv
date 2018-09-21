@@ -4,10 +4,10 @@ module testbench;
     reg  [3:0] dig;
     wire [7:0] seg;
 
-    display_driver dut
+    seven_seg_digit dut
     (
         .dig  ( dig ),
-        .seg  ( seg ) 
+        .hex  ( seg ) 
     );
 
     initial

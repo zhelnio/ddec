@@ -1,7 +1,8 @@
 
 set source_files [list \
-    "[file normalize "../rtl/board_top.v"]" \
-    "[file normalize "../rtl/display_driver.v"]" \
+    "[file normalize "../rtl/board_digilent.sv"]" \
+    "[file normalize "../rtl/seven_seg_digit.v"]" \
+    "[file normalize "../rtl/seven_seg_N_ca.sv"]" \
 ]
 
 set constr_files [list \
