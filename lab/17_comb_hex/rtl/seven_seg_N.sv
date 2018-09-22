@@ -8,6 +8,8 @@ module seven_seg_N
 );
     wire [DIGITS-1:0][3:0] dig = data;
 
+    // another example of generate:
+    //   when the number of module instances can vary
     genvar i;
     generate
         for (i = 0; i < DIGITS; i=i+1 ) begin : segment

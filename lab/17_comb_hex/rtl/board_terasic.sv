@@ -14,6 +14,7 @@ module board_terasic
 );
     wire [23:0] data = { 14'b0, SW };
 
+// macro usage example
 `ifndef USE_SYSTEM_VERILOG
     seven_seg_6 hex
     (
