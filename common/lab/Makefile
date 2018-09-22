@@ -25,7 +25,7 @@ RUN_DIR  = $(PWD)/run
 RTL_DIR  = $(PWD)/rtl
 TB_DIR   = $(PWD)/tb
 
-BOARDS_SUPPORTED := de10_lite de0_cv nexys4_ddr
+BOARDS_SUPPORTED ?= de10_lite de0_cv nexys4_ddr
 BOARD            ?= nexys4_ddr
 
 ########################################################
