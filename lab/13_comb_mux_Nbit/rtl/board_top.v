@@ -11,7 +11,7 @@ module board_top
         .idata0 ( SW  [1:0] ),
         .idata1 ( SW  [3:2] ),
         .idata2 ( SW  [5:4] ),
-        .sel    ( KEY [1:0] ),
+        .sel    ( SW  [9:8] ),
         .odata0 ( LED [1:0] ),
         .odata1 ( LED [3:2] ),
         .odata2 ( LED [5:4] ),
