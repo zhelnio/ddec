@@ -2,16 +2,16 @@
 
 module testbench;
 
-    reg  clk, rst_n, d;
+    reg  clk, clr, d;
     wire q;
 
-    dff_sync_rst_n dff_sync_rst_n (clk, rst_n, d, q);
+    dff_sync_clr dff_sync_clr (clk, clr, d, q);
     
     initial $dumpvars;
 
     initial
     begin
-        rst_n = 0;
+        clr = 0;
         
         $monitor ("%0d clk %b d %b q %b", $time, clk, d, q);
 
@@ -19,7 +19,7 @@ module testbench;
         # 20;   clk = 1; d = 0; 
         # 20;   clk = 0; d = 1;
         # 20;   clk = 1; d = 1;
-        # 20;   clk = 0; d = 1; rst_n = 1;
+        # 20;   clk = 0; d = 1; clr = 0;
         # 20;   clk = 1; d = 1;
         # 20;   clk = 0; d = 0;
         # 20;   clk = 1; d = 0; 
@@ -27,7 +27,7 @@ module testbench;
         # 10;   clk = 0; d = 0;
         # 10;   clk = 0; d = 1; 
         # 10;   clk = 1; d = 1; 
-        # 10;   clk = 1; d = 1; rst_n = 0;
+        # 10;   clk = 1; d = 1; clr = 1;
         # 10;   clk = 0; d = 1;
         # 10;   clk = 0; d = 1;
         # 10;   clk = 1; d = 1;

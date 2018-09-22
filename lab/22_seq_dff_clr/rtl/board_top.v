@@ -6,17 +6,17 @@ module board_top
 );
     wire d     = KEY[0];
     wire clk   = KEY[1];
-    wire rst_n = SW [0];
+    wire clr   = SW [0];
     wire q;
 
-    dff_sync_rst_n dff_sync_rst_n
+    dff_sync_clr dff_sync_clr
     (
         .clk   ( clk   ),
-        .rst_n ( rst_n ),
+        .clr   ( clr   ),
         .d     ( d     ),
         .q     ( q     )
     );
 
-    assign LED[9:0] = { 6'b0, rst_n, q, clk, d };
+    assign LED[9:0] = { 6'b0, clr, q, clk, d };
 
 endmodule

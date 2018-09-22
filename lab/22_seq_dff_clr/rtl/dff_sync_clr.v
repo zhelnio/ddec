@@ -1,13 +1,13 @@
-module dff_sync_rst_n
+module dff_sync_clr
 (
     input       clk,
-    input       rst_n,
+    input       clr,
     input       d,
     output  reg q
 );
 
     always @ (posedge clk)
-        if (!rst_n)
+        if (clr)
             q <= 0;
         else
             q <= d;

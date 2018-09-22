@@ -1,7 +1,7 @@
 
 set source_files [list \
     "[file normalize "../rtl/board_top.v"]" \
-    "[file normalize "../rtl/dff_sync_rst_n.v"]" \
+    "[file normalize "../rtl/dff_sync_clr.v"]" \
 ]
 
 set constr_files [list \
