@@ -12,8 +12,8 @@ module lab_top
     output [1:0] odata2
 );
     // 1-2. pure Verilog examples
-    b2_mux_3_1_case_one_hot   b2_mux_3_1_case_one_hot   (.d0(idata0), .d1(idata1), .d2(idata2), .d3(idata3), .sel(sel), .y(odata0));
-    b2_mux_3_1_casez_priority b2_mux_3_1_casez_priority (.d0(idata0), .d1(idata1), .d2(idata2), .d3(idata3), .sel(sel), .y(odata1));
+    b2_mux_4_1_case_one_hot   b2_mux_4_1_case_one_hot   (.d0(idata0), .d1(idata1), .d2(idata2), .d3(idata3), .sel(sel), .y(odata0));
+    b2_mux_4_1_casez_priority b2_mux_4_1_casez_priority (.d0(idata0), .d1(idata1), .d2(idata2), .d3(idata3), .sel(sel), .y(odata1));
 
     // 3. SystemVerilog packed array example
     wire [3:0][1:0] input_data; // packed array is a SystemVerilog feature

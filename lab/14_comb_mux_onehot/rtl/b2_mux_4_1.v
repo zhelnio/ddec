@@ -1,5 +1,5 @@
 
-module b2_mux_3_1_case_one_hot
+module b2_mux_4_1_case_one_hot
 (
     input      [1:0] d0,
     input      [1:0] d1,
@@ -19,7 +19,7 @@ module b2_mux_3_1_case_one_hot
         endcase
 endmodule
 
-module b2_mux_3_1_casez_priority
+module b2_mux_4_1_casez_priority
 (
     input      [1:0] d0,
     input      [1:0] d1,
