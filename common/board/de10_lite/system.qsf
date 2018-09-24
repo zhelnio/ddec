@@ -5,6 +5,9 @@ set_global_assignment -name FAMILY                    "MAX 10 FPGA"
 set_global_assignment -name NUM_PARALLEL_PROCESSORS   4
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY  .
 
+# project files
+source ../run/script_quartus.tcl
+
 # I/O ports settings
 set_location_assignment PIN_P11 -to CLK
 
@@ -122,5 +125,5 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to LED*
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to HEX*
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"           -to GPIO*
 
-# project files
-source ../run/script_quartus.tcl
+# Pull-up resistor enable (example)
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to GPIO[15]
