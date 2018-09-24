@@ -1,4 +1,6 @@
 
+`timescale 1 ns / 100 ps
+
 module testbench;
 
     reg  [3:0] dig;

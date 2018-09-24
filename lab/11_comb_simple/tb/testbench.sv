@@ -1,3 +1,4 @@
+`timescale 1 ns / 100 ps
 
 // testbench is a module which only task is to test another module
 // testbench is for simulation only, not for synthesis
