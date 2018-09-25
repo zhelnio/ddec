@@ -34,6 +34,7 @@ BOARD            ?= nexys4_ddr
 clean: \
 	sim_clean \
 	icarus_clean \
+	xsim_clean \
 	board_clean
 
 sim: sim_cmd
