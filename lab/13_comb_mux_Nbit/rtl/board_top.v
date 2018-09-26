@@ -15,7 +15,8 @@ module board_top
         .odata0 ( LED [1:0] ),
         .odata1 ( LED [3:2] ),
         .odata2 ( LED [5:4] ),
-        .odata3 ( LED [7:6] ) 
+        .odata3 ( LED [7:6] ),
+        .odata4 ( LED [9:8] ) 
     );
 
 endmodule
