@@ -13,12 +13,17 @@ module board_top
     reg [1:0] sel;
     reg       le;
 
+    wire [5:0] out;
+    reg  [5:0] led;
+    assign LED [5:0] = led;
+
     always @(posedge CLK) begin
         idata0 <= SW  [1:0];
         idata1 <= SW  [3:2];
         idata2 <= SW  [5:4];
         sel    <= SW  [9:8];
         le     <= SW  [  7];
+        led    <= out;
     end
 
     lab_top lab_top
@@ -28,9 +33,9 @@ module board_top
         .idata2     ( idata2    ),
         .sel        ( sel       ),
         .le         ( le        ),
-        .case_latch ( LED [1:0] ),
-        .case_corrt ( LED [3:2] ),
-        .latch      ( LED [5:4] ) 
+        .case_latch ( out [1:0] ),
+        .case_corrt ( out [3:2] ),
+        .latch      ( out [5:4] ) 
     );
 
 endmodule
