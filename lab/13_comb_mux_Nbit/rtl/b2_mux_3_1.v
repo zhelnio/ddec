@@ -9,7 +9,6 @@ module b2_mux_3_1_case_full
     // All possible values of input signals should be provided
     // or an inferred latch will be generated!
     always @(*) begin
-        y = d2;
         case (sel)
             2'b00: y = d0;
             2'b01: y = d1;
@@ -17,7 +16,6 @@ module b2_mux_3_1_case_full
             2'b11: y = d2;
         endcase
     end
-
 endmodule
 
 module b2_mux_3_1_case
@@ -37,7 +35,6 @@ module b2_mux_3_1_case
             2'b10: y = d2;
         endcase
     end
-
 endmodule
 
 module b2_mux_3_1_case_default
@@ -56,7 +53,6 @@ module b2_mux_3_1_case_default
             2'b10  : y = d2;
             default: y = d2;
         endcase
-
 endmodule
 
 module b2_mux_3_1_casez
