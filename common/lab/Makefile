@@ -37,11 +37,18 @@ clean: \
 	xsim_clean \
 	board_clean
 
+sim_all: \
+	sim_cmd \
+	xsim_cmd \
+	icarus_cmd
+
 sim: sim_cmd
 
 xsim: xsim_cmd
 
 icarus: icarus_cmd
+
+create: synth_create
 
 synth: \
 	synth_clean \
