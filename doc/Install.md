@@ -10,6 +10,7 @@
 3. Intel Quartus Lite 17.1
 4. Xilinx Vivado WebPack 2018.2
 5. Icarus Verilog 10.1.1
+6. Git
 
 ## Details of Install Process
 
@@ -65,5 +66,12 @@
         C:\> gtkwave
     ```
 
-6. Additional information
+6. Git
+    - link: https://git-scm.com/download/win
+    - check that folder with git binary was added to %PATH%
+    ```
+        C:\> git
+    ```
+
+7. Additional information
     - to simplify %PATH% editing you can use RapidEE: https://www.rapidee.com/
