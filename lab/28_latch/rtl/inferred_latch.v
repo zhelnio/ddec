@@ -3,7 +3,12 @@
 // The example of mux with inferred (bad) latch.
 // Quartus uses a LUT-based mux to implement latch (where mux output is connected to one of its inputs).
 // The async latches behavior in FPGA can be unstable because of glitches.
-// The behavior of this code is different for DE10_Lite (MAX10) and DO0_CV (Cyclone 5).
+// Synthesis tool (Quartus) warns of possible problems:
+//   Warning (13012): Latch <name> has unsafe behavior ...
+//     Warning (13013): Ports D and ENA on the latch are fed by the same signal <name> ...
+// For details read the "Intel Quartus Prime Pro Edition Handbook Volume 1: Design and Compilation":
+//  sections 4.5.3 "Latches" and 4.5.3.2 "Inferring Latches Correctly".
+// The behavior of this code can be different for DE10_Lite (MAX10) and DO0_CV (Cyclone 5).
 module case_inferred_latch
 (
     input      [1:0] d0, d1, d2, 
