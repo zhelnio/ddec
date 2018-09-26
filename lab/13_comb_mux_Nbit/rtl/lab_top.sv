@@ -15,10 +15,10 @@ module lab_top
     output [1:0] odata4 
 );
     // 1-3. pure verilog examples
-	b2_mux_3_1_case_full    b2_mux_3_1_case_full    (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata0));
-	b2_mux_3_1_case         b2_mux_3_1_case         (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata1));
-	b2_mux_3_1_case_default b2_mux_3_1_case_default (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata2));
-    b2_mux_3_1_casez        b2_mux_3_1_casez        (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata3));
+	b2_mux_3_1_case_full         b2_mux_3_1_case_full    (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata0));
+	b2_mux_3_1_case              b2_mux_3_1_case         (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata1));
+	b2_mux_3_1_case_default      b2_mux_3_1_case_default (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata2));
+    b2_mux_3_1_casez        #(2) b2_mux_3_1_casez        (.d0(idata0),.d1(idata1),.d2(idata2),.sel(sel),.y(odata3));
 
 `ifdef ENABLE_SV_CODE
     // 4. SystemVerilog packed array example
