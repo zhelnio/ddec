@@ -4,7 +4,8 @@ module bN_mux_N_1_priority
     parameter DATA_WIDTH = 4,
               INPUT_SIZE = 4
 )(
-    input      [INPUT_SIZE-1:0][DATA_WIDTH-1:0] d,   // packed array in a port list is a SystemVerilog feature
+    // packed array in a port list is a SystemVerilog feature
+    input      [INPUT_SIZE-1:0][DATA_WIDTH-1:0] d,   
     input      [INPUT_SIZE-1:0]                 sel,
     output reg                 [DATA_WIDTH-1:0] y
 );
@@ -15,5 +16,4 @@ module bN_mux_N_1_priority
                 y = d[i];
         end
     end
-
 endmodule
