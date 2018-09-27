@@ -7,14 +7,13 @@ module bN_demux_1_N
 )(
     input                      [DATA_WIDTH-1:0] din,
     input                      [ADDR_WIDTH-1:0] sel,
-    output reg [OUTPT_SIZE-1:0][DATA_WIDTH-1:0] dout // packed array in a port list is a SystemVerilog feature
+    // packed array in a port list is a SystemVerilog feature
+    output reg [OUTPT_SIZE-1:0][DATA_WIDTH-1:0] dout 
 );
-    localparam ZEROS = { DATA_WIDTH { 1'b0 } };
+    localparam ZEROS = { (OUTPT_SIZE * DATA_WIDTH) { 1'b0 } };
 
     always @(*) begin
-        for (int i = 0; i < OUTPT_SIZE; i = i+1 )
-            dout[i] = ZEROS;
-        
+        dout = ZEROS;
         dout[sel] = din;
     end
 
