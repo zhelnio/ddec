@@ -10,7 +10,7 @@ module b2_mux_4_1_case_one_hot
 );
 
     always @(*)
-        casez (sel)
+        case (sel)
             4'b0001: y = d0;
             4'b0010: y = d1;
             4'b0100: y = d2;
