@@ -15,7 +15,8 @@ module case_inferred_latch
     input      [1:0] sel,
     output reg [1:0] y
 );
-    // the same result can be be obtained when 'if' is used without 'else'
+    // the same result can be be obtained 
+    // when 'if' is used without 'else'
     always @(*)
         case (sel)
             2'b00: y = d0;
