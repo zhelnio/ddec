@@ -17,7 +17,7 @@ module board_top
 
     wire clk     = CLK;
     wire rst_n   = KEY [0];
-    wire echo    = GPIO[35];
+    wire echo    = GPIO[1];
     wire trigger;
 
     sr04_receiver
@@ -40,8 +40,8 @@ module board_top
     display_driver hex4 ( .dig (range [16 +: 4]), .seg (HEX4) );
     display_driver hex5 ( .dig (range [20 +: 4]), .seg (HEX5) );
 
-    assign LED [ 0] = echo;
-    assign LED [ 1] = trigger;
-    assign GPIO[33] = trigger;
+    assign LED [0] = echo;
+    assign LED [1] = trigger;
+    assign GPIO[0] = trigger;
 
 endmodule
