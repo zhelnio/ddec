@@ -3,7 +3,7 @@
 module testbench;
 
     localparam t    = 20;
-    localparam Tmax = 300000;
+    localparam Tmax = 30000;
     localparam WIDTH = 16;
 
     // clock and reset
@@ -91,10 +91,14 @@ module kb_4x4_simulation_model
         repeat(DELAY_DOWN) @(posedge clk);
     end
 
+    // row and column one hot codes
     wire [3:0] button_row = (1 << button_num[1:0]);
     wire [3:0] button_clm = (1 << button_num[3:2]);
 
-    assign row    = (button_clm & ~clm) ? ~button_row : ~4'b0;
+    // parse request
+    wire clm_hit  = button_valid && (button_clm & ~clm);
+
+    assign row    = clm_hit ? ~button_row : ~4'b0;
     assign tb_btn = button_num;
     assign tb_vld = button_valid;
  

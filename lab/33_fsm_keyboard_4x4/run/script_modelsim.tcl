@@ -11,6 +11,7 @@ vsim -novopt work.testbench
 
 # add all testbench signals to time diagram
 add wave sim:/testbench/*
+add wave sim:/testbench/dut/*
 
 # run the simulation
 run -all
