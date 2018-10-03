@@ -2,7 +2,7 @@
 help:
 	$(info make help         - show this message)
 	$(info make clean        - delete synth and simulation folders)
-	$(info make sim          - the same as sim_cmd)
+	$(info make sim          - the same as sim_gui)
 	$(info make icarus       - the same as icarus_cmd)
 	$(info make synth        - clean, create the board project and run the synthesis (for default board))
 	$(info make open         - the same as synth_gui)
@@ -26,7 +26,7 @@ RTL_DIR  = $(PWD)/rtl
 TB_DIR   = $(PWD)/tb
 
 BOARDS_SUPPORTED ?= de10_lite de0_cv nexys4_ddr
-BOARD            ?= nexys4_ddr
+BOARD            ?= de10_lite
 
 ########################################################
 # common make targets
@@ -42,7 +42,7 @@ sim_all: \
 	xsim_cmd \
 	icarus_cmd
 
-sim: sim_cmd
+sim: sim_gui
 
 xsim: xsim_cmd
 
@@ -85,7 +85,7 @@ sim_cmd: sim_dir
 	$(VSIM_BIN) $(VSIM_OPT_COMMON) $(VSIM_OPT_CMD)
 
 sim_gui: sim_dir
-	$(VSIM_BIN) $(VSIM_OPT_COMMON) $(VSIM_OPT_GUI)
+	$(VSIM_BIN) $(VSIM_OPT_COMMON) $(VSIM_OPT_GUI) &
 
 
 ########################################################
