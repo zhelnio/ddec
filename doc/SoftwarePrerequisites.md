@@ -26,6 +26,10 @@
         C:\> pacman -S make
         C:\> pacman -S mc
     ```
+    - to check that the %PATH% is correct, issue the following command under cmd.exe
+    ```
+        C:\> make
+    ```
 
 3. Intel Quartus Lite 17.1
     - link: http://dl.altera.com/17.1/?edition=lite&lang=en
@@ -39,10 +43,6 @@
     ```
         C:\> quartus
         C:\> vsim
-    ```
-    - to check that the %PATH% is correct, issue the following command under cmd.exe
-    ```
-        C:\> make
     ```
 
 4. Xilinx Vivado WebPack 2018.2
