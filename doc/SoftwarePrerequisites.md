@@ -7,6 +7,7 @@
     - MIPS Support (kdarkhan.mips)
 2. MSYS2 with packages:
     - make
+    - mc
 3. Intel Quartus Lite 17.1
 4. Xilinx Vivado WebPack 2018.2
 5. Icarus Verilog 10.1.1
@@ -20,9 +21,10 @@
 2. MSYS2
     - link: https://www.msys2.org/
     - assume you installed MSYS2 at 'C:\bin\msys64', add 'C:\bin\msys64\usr\bin' to your %PATH% environment variable;
-    - to install "make", issue the following command under cmd.exe
+    - to install "make" & "mc", issue the following commands under cmd.exe
     ```
         C:\> pacman -S make
+        C:\> pacman -S mc
     ```
 
 3. Intel Quartus Lite 17.1
