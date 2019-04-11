@@ -12,6 +12,7 @@
 4. Xilinx Vivado WebPack 2018.2
 5. Icarus Verilog 10.1.1
 6. Git
+7. Java
 
 ## Details of Install Process
 
@@ -74,6 +75,9 @@
     ```
         C:\> git
     ```
+7. Java
+    - install Java from java.com or add to the PATH the JRE from Quartus installation: 'C:\bin\altera\17.1\quartus\bin64\jre64\bin'
 
-7. Additional information
+8. Additional information
     - to simplify %PATH% editing you can use RapidEE: https://www.rapidee.com/
+ 
