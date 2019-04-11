@@ -14,7 +14,13 @@
 6. Git
 7. Java
 
-## Details of Install Process
+## Details
+
+Install process [video for Windows 10](https://youtu.be/YvYNpyBsC_4)
+
+For Ubuntu you can use this [set of scripts (ubuntu-hdl-tools-install)](https://github.com/zhelnio/ubuntu-hdl-tools-install)
+
+## Description
 
 1. Visual Studio Code
     - link: https://code.visualstudio.com/
